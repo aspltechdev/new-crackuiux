@@ -30,7 +30,7 @@ export function WorkshopDetails() {
       icon: "🗣️"
     },
     {
-      title: "90-Day Design Challenge",
+      title: " Design Challenge",
       description: "Consistency beats talent. Transform your skills day by day with challenges that build your confidence and portfolio.",
       icon: "🚀"
     },
@@ -152,8 +152,8 @@ export function WorkshopDetails() {
           {/* Join Now Button */}
           <div className="mt-8 text-center">
             <JoinNowButton
-              amount={299}
-              text="Join Now @ ₹299 Only"
+              amount={499}
+              text="Join Now @ ₹499 Only"
               className="inline-block cursor-pointer bg-gradient-to-r from-yellow-400 to-orange-500 px-8 md:px-12 py-4 md:py-6 rounded-full shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300 transform hover:scale-105 text-xl md:text-2xl text-black"
             />
           </div>

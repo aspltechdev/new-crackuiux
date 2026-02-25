@@ -33,9 +33,13 @@ export function VideoSection() {
             Ready to Transform Your Career?
           </p>
           <JoinNowButton
-            amount={1}
+            amount={499}
+            text="Join Now @ ₹499 Only"
             className="inline-block cursor-pointer bg-gradient-to-r from-yellow-400 to-orange-500 px-8 md:px-12 py-4 md:py-6 rounded-full shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300 transform hover:scale-105 text-xl md:text-2xl text-black"
           />
+          <p className="mt-4 text-gray-400 font-['Poppins:Regular',sans-serif] text-sm">
+            Invest ₹499 (Limited Time Offer)
+          </p>
         </div>
       </div>
     </div>
