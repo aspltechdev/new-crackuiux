@@ -33,67 +33,74 @@ const transporter = nodemailer.createTransport({
 });
 
 async function sendWorkshopEmail(toEmail, customerName, paymentDetails) {
-    const { paymentId, amount, date } = paymentDetails;
+    const { paymentId, amount } = paymentDetails;
     const formattedAmount = (amount / 100).toFixed(2);
 
     const mailOptions = {
         from: `"Auro Lakshmanan" <${process.env.EMAIL_USER}>`,
         to: toEmail,
-        subject: 'Confirmed: Your UI/UX Interview Workshop Registration',
+        subject: 'Confirmed: Your 3-Hour UI/UX Interview Workshop Registration',
         html: `
             <!DOCTYPE html>
             <html>
             <head>
                 <style>
                     .container { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden; }
-                    .header { background: linear-gradient(135deg, #9333ea 0%, #7e22ce 100%); color: white; padding: 40px 20px; text-align: center; }
-                    .content { padding: 30px; color: #374151; }
-                    .workshop-box { background-color: #f9fafb; border: 1px dashed #d1d5db; border-radius: 8px; padding: 20px; margin: 25px 0; }
-                    .btn { display: inline-block; background-color: #9333ea; color: white !important; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 10px; }
-                    .footer { background-color: #f3f4f6; color: #6b7280; padding: 20px; text-align: center; font-size: 12px; }
-                    .receipt-item { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
-                    .label { color: #9ca3af; }
+                    .header { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); color: white; padding: 45px 20px; text-align: center; }
+                    .content { padding: 35px; color: #374151; line-height: 1.6; }
+                    .workshop-box { background-color: #f5f3ff; border: 1px solid #ddd6fe; border-radius: 12px; padding: 25px; margin: 25px 0; }
+                    .btn { display: inline-block; background-color: #7c3aed; color: white !important; padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 15px; box-shadow: 0 4px 6px -1px rgba(124, 58, 237, 0.3); }
+                    .footer { background-color: #f9fafb; color: #6b7280; padding: 25px; text-align: center; font-size: 13px; border-top: 1px solid #f3f4f6; }
+                    .receipt-item { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px; border-bottom: 1px solid #f3f4f6; padding-bottom: 8px; }
+                    .label { color: #6b7280; font-weight: 500; }
+                    .contact-box { background-color: #fdf2f8; border: 1px solid #fbcfe8; border-radius: 8px; padding: 15px; margin-top: 25px; font-size: 14px; }
                 </style>
             </head>
             <body>
                 <div class="container">
                     <div class="header">
-                        <h1 style="margin: 0; font-size: 24px;">Registration Confirmed!</h1>
-                        <p style="margin-top: 10px; opacity: 0.9;">Get ready to crack your UI/UX interviews.</p>
+                        <h1 style="margin: 0; font-size: 26px; letter-spacing: -0.5px;">Registration Confirmed!</h1>
+                        <p style="margin-top: 12px; opacity: 0.95; font-size: 16px;">Master your UI/UX interviews in just 3 hours.</p>
                     </div>
                     <div class="content">
                         <p>Hello <strong>${customerName}</strong>,</p>
-                        <p>We've received your payment. You are now officially enrolled in the <strong>UI/UX Interview Cracking Workshop</strong>. We are excited to have you join us!</p>
+                        <p>Congratulations! You have successfully registered for the <strong>3-Hour UI/UX Interview Cracking Masterclass</strong>. We’ve received your payment, and your seat is now officially secured.</p>
                         
                         <div class="workshop-box">
-                            <h3 style="margin-top: 0; color: #111827;">Workshop Details</h3>
-                            <p><strong>📅 Date:</strong> Upcoming Sunday</p>
-                            <p><strong>⏰ Time:</strong> 10:00 AM - 01:00 PM IST</p>
-                            <p><strong>📍 Location:</strong> Online (Google Calendar)</p>
-                            <a href="https://calendar.app.google/qeQhP6riDS8PpqBS9" class="btn">Add to Calendar & View Link</a>
+                            <h3 style="margin-top: 0; color: #1e1b4b; font-size: 18px;">📅 Workshop Schedule</h3>
+                            <p style="margin: 8px 0;"><strong>Date:</strong> Sunday, 1st March 2026</p>
+                            <p style="margin: 8px 0;"><strong>Time:</strong> 10:00 AM – 01:00 PM IST</p>
+                            <p style="margin: 8px 0;"><strong>Duration:</strong> 3 Hours (Power-packed Session)</p>
+                            <a href="https://calendar.app.google/qeQhP6riDS8PpqBS9" class="btn">Join Now — ₹${formattedAmount} Only</a>
                         </div>
 
-                        <h3 style="color: #111827; border-bottom: 1px solid #edf2f7; padding-bottom: 10px;">Payment Receipt</h3>
+                        <h3 style="color: #111827; margin-top: 35px; margin-bottom: 15px; font-size: 18px;">Payment Summary</h3>
                         <div class="receipt-item">
-                            <span class="label">Payment ID:</span>
-                            <span>${paymentId}</span>
+                            <span class="label">Transaction ID</span>
+                            <span style="font-family: monospace; color: #4b5563;">${paymentId}</span>
                         </div>
                         <div class="receipt-item">
-                            <span class="label">Amount Paid:</span>
-                            <span>INR ${formattedAmount}</span>
+                            <span class="label">Total Paid</span>
+                            <span style="color: #111827; font-weight: 600;">₹${formattedAmount}</span>
                         </div>
                         <div class="receipt-item">
-                            <span class="label">Status:</span>
+                            <span class="label">Status</span>
                             <span style="color: #059669; font-weight: bold;">Successful</span>
                         </div>
 
-                        <p style="margin-top: 30px;">If you have any questions before the workshop, feel free to reply to this email.</p>
-                        <p>See you soon!</p>
-                        <p>Best regards,<br><strong>Auro Lakshmanan</strong></p>
+                        <div class="contact-box">
+                            <h4 style="margin-top: 0; color: #be185d;">📞 Need Help?</h4>
+                            <p style="margin: 5px 0;">If you have any questions or face issues joining, please reach out to us:</p>
+                            <p style="margin: 3px 0;"><strong>Email:</strong> aspltechdev@gmail.com</p>
+                            <p style="margin: 3px 0;"><strong>WhatsApp/Call:</strong> +91 99017 24479</p>
+                        </div>
+
+                        <p style="margin-top: 30px; border-top: 1px solid #f3f4f6; pt-15px;">See you on the 1st of March!</p>
+                        <p>Best regards,<br><strong style="color: #7c3aed;">Auro Lakshmanan</strong><br><span style="font-size: 13px; color: #6b7280;">UI/UX Design Mentor</span></p>
                     </div>
                     <div class="footer">
-                        <p>© ${new Date().getFullYear()} Auro Lakshmanan UI/UX. All rights reserved.</p>
-                        <p>This is an automated confirmation of your registration.</p>
+                        <p>© ${new Date().getFullYear()} Auro Lakshmanan Design Mentor. All rights reserved.</p>
+                        <p style="color: #9ca3af; font-size: 11px;">This is an automated enrollment confirmation for the workshop.</p>
                     </div>
                 </div>
             </body>
@@ -103,9 +110,9 @@ async function sendWorkshopEmail(toEmail, customerName, paymentDetails) {
 
     try {
         await transporter.sendMail(mailOptions);
-        console.log('Workshop confirmation email sent to:', toEmail);
+        console.log('Detailed workshop confirmation sent:', toEmail);
     } catch (error) {
-        console.error('Error sending email:', error);
+        console.error('Error sending detailed email:', error);
     }
 }
 
@@ -116,52 +123,46 @@ async function sendFailureEmail(toEmail, customerName, paymentDetails) {
     const mailOptions = {
         from: `"Auro Lakshmanan" <${process.env.EMAIL_USER}>`,
         to: toEmail,
-        subject: 'Payment Unsuccessful: UI/UX Workshop Registration',
+        subject: 'Action Required: Payment Failed for UI/UX Workshop',
         html: `
             <!DOCTYPE html>
             <html>
             <head>
                 <style>
                     .container { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden; }
-                    .header { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; padding: 40px 20px; text-align: center; }
-                    .content { padding: 30px; color: #374151; }
-                    .info-box { background-color: #fffafb; border: 1px solid #fee2e2; border-radius: 8px; padding: 20px; margin: 25px 0; }
-                    .btn { display: inline-block; background-color: #ef4444; color: white !important; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 10px; }
-                    .footer { background-color: #f3f4f6; color: #6b7280; padding: 20px; text-align: center; font-size: 12px; }
-                    .receipt-item { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
-                    .label { color: #9ca3af; }
+                    .header { background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%); color: white; padding: 45px 20px; text-align: center; }
+                    .content { padding: 35px; color: #374151; line-height: 1.6; }
+                    .error-box { background-color: #fff1f2; border: 1px solid #fecdd3; border-radius: 12px; padding: 25px; margin: 25px 0; }
+                    .btn { display: inline-block; background-color: #e11d48; color: white !important; padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 15px; }
+                    .footer { background-color: #f9fafb; color: #6b7280; padding: 25px; text-align: center; font-size: 13px; }
+                    .contact-box { background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-top: 25px; font-size: 14px; }
                 </style>
             </head>
             <body>
                 <div class="container">
                     <div class="header">
-                        <h1 style="margin: 0; font-size: 24px;">Payment Unsuccessful</h1>
-                        <p style="margin-top: 10px; opacity: 0.9;">We couldn't process your registration payment.</p>
+                        <h1 style="margin: 0; font-size: 26px;">Payment Unsuccessful</h1>
+                        <p style="margin-top: 12px; opacity: 0.95;">Don't miss out on securing your seat!</p>
                     </div>
                     <div class="content">
                         <p>Hello <strong>${customerName}</strong>,</p>
-                        <p>We’re writing to let you know that your recent payment for the <strong>UI/UX Interview Cracking Workshop</strong> was not successful. As a result, your registration is not yet confirmed.</p>
+                        <p>We attempted to process your payment for the <strong>3-Hour UI/UX Interview Cracking Masterclass</strong>, but unfortunately, the transaction was unsuccessful.</p>
                         
-                        <div class="info-box">
-                            <h3 style="margin-top: 0; color: #111827;">What happened?</h3>
-                            <p>Typically, payments fail due to incorrect card details, insufficient funds, or bank authorization issues.</p>
-                            <p><strong>Reason for Failure:</strong> ${reason || 'Transaction declined by bank'}</p>
-                            <a href="https://aspltesting.online" class="btn">Try Registering Again</a>
+                        <div class="error-box">
+                            <h3 style="margin-top: 0; color: #9f1239; font-size: 18px;">Reason for Failure</h3>
+                            <p><strong>Bank/Gateway Message:</strong> ${reason || 'Transaction declined by bank/network.'}</p>
+                            <p style="margin-top: 10px; font-size: 14px; color: #4b5563;">Don't worry, your seat can still be reserved! Please try registering again using a different UPI ID, card, or payment method.</p>
+                            <a href="https://aspltesting.online" class="btn">Resume Registration</a>
                         </div>
 
-                        <h3 style="color: #111827; border-bottom: 1px solid #edf2f7; padding-bottom: 10px;">Attempted Transaction Details</h3>
-                        <div class="receipt-item">
-                            <span class="label">Payment ID:</span>
-                            <span>${paymentId}</span>
-                        </div>
-                        <div class="receipt-item">
-                            <span class="label">Attempted Amount:</span>
-                            <span>INR ${formattedAmount}</span>
+                        <div class="contact-box">
+                            <h4 style="margin-top: 0; color: #475569;">📞 Having issues?</h4>
+                            <p style="margin: 5px 0;">If you are facing payment difficulties, feel free to contact us directly:</p>
+                            <p style="margin: 3px 0;"><strong>WhatsApp/Call:</strong> +91 99017 24479</p>
+                            <p style="margin: 3px 0;"><strong>Email:</strong> aspltechdev@gmail.com</p>
                         </div>
 
-                        <p style="margin-top: 30px;">If money was deducted from your account, it will usually be refunded automatically within 5-7 business days by your bank.</p>
-                        <p>If you need assistance, please reply to this email.</p>
-                        <p>Best regards,<br><strong>Auro Lakshmanan</strong></p>
+                        <p style="margin-top: 30px;">Best regards,<br><strong>Auro Lakshmanan</strong></p>
                     </div>
                     <div class="footer">
                         <p>© ${new Date().getFullYear()} Auro Lakshmanan UI/UX. All rights reserved.</p>
