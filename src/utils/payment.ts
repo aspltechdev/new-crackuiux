@@ -9,7 +9,7 @@ export const handlePayment = async (amount: number, description: string, userDat
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                amount, // amount in INR
+                amount, 
                 currency: 'INR',
                 receipt: `receipt_${Date.now()}`,
                 notes: {
