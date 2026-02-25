@@ -32,29 +32,78 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-async function sendWorkshopEmail(toEmail, customerName) {
+async function sendWorkshopEmail(toEmail, customerName, paymentDetails) {
+    const { paymentId, amount, date } = paymentDetails;
+    const formattedAmount = (amount / 100).toFixed(2);
+
     const mailOptions = {
-        from: process.env.EMAIL_USER,
+        from: `"Auro Lakshmanan" <${process.env.EMAIL_USER}>`,
         to: toEmail,
-        subject: 'Welcome to the UI/UX Workshop - Your Meeting Link!',
+        subject: 'Confirmed: Your UI/UX Interview Workshop Registration',
         html: `
-            <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-                <h2 style="color: #9333ea;">Hi ${customerName},</h2>
-                <p>Thank you for your payment! You are officially registered for the <strong>UI/UX Workshop</strong>.</p>
-                <div style="background-color: #f3e8ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                    <h3 style="margin: 0; color: #7e22ce;">Event Details:</h3>
-                    <p><strong>Meeting Link:</strong> <a href="https://calendar.app.google/qeQhP6riDS8PpqBS9" style="color: #9333ea; font-weight: bold;">Join Meeting Here</a></p>
-                    <p><strong>Date & Time:</strong> Upcoming Sunday at 10:00 AM IST</p>
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <style>
+                    .container { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden; }
+                    .header { background: linear-gradient(135deg, #9333ea 0%, #7e22ce 100%); color: white; padding: 40px 20px; text-align: center; }
+                    .content { padding: 30px; color: #374151; }
+                    .workshop-box { background-color: #f9fafb; border: 1px dashed #d1d5db; border-radius: 8px; padding: 20px; margin: 25px 0; }
+                    .btn { display: inline-block; background-color: #9333ea; color: white !important; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 10px; }
+                    .footer { background-color: #f3f4f6; color: #6b7280; padding: 20px; text-align: center; font-size: 12px; }
+                    .receipt-item { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+                    .label { color: #9ca3af; }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="header">
+                        <h1 style="margin: 0; font-size: 24px;">Registration Confirmed!</h1>
+                        <p style="margin-top: 10px; opacity: 0.9;">Get ready to crack your UI/UX interviews.</p>
+                    </div>
+                    <div class="content">
+                        <p>Hello <strong>${customerName}</strong>,</p>
+                        <p>We've received your payment. You are now officially enrolled in the <strong>UI/UX Interview Cracking Workshop</strong>. We are excited to have you join us!</p>
+                        
+                        <div class="workshop-box">
+                            <h3 style="margin-top: 0; color: #111827;">Workshop Details</h3>
+                            <p><strong>📅 Date:</strong> Upcoming Sunday</p>
+                            <p><strong>⏰ Time:</strong> 10:00 AM - 01:00 PM IST</p>
+                            <p><strong>📍 Location:</strong> Online (Google Calendar)</p>
+                            <a href="https://calendar.app.google/qeQhP6riDS8PpqBS9" class="btn">Add to Calendar & View Link</a>
+                        </div>
+
+                        <h3 style="color: #111827; border-bottom: 1px solid #edf2f7; padding-bottom: 10px;">Payment Receipt</h3>
+                        <div class="receipt-item">
+                            <span class="label">Payment ID:</span>
+                            <span>${paymentId}</span>
+                        </div>
+                        <div class="receipt-item">
+                            <span class="label">Amount Paid:</span>
+                            <span>INR ${formattedAmount}</span>
+                        </div>
+                        <div class="receipt-item">
+                            <span class="label">Status:</span>
+                            <span style="color: #059669; font-weight: bold;">Successful</span>
+                        </div>
+
+                        <p style="margin-top: 30px;">If you have any questions before the workshop, feel free to reply to this email.</p>
+                        <p>See you soon!</p>
+                        <p>Best regards,<br><strong>Auro Lakshmanan</strong></p>
+                    </div>
+                    <div class="footer">
+                        <p>© ${new Date().getFullYear()} Auro Lakshmanan UI/UX. All rights reserved.</p>
+                        <p>This is an automated confirmation of your registration.</p>
+                    </div>
                 </div>
-                <p>Please make sure to join 5 minutes early. We look forward to seeing you there!</p>
-                <p>Best regards,<br>Auro Lakshmanan</p>
-            </div>
+            </body>
+            </html>
         `
     };
 
     try {
         await transporter.sendMail(mailOptions);
-        console.log('Workshop email sent to:', toEmail);
+        console.log('Workshop confirmation email sent to:', toEmail);
     } catch (error) {
         console.error('Error sending email:', error);
     }
@@ -110,7 +159,11 @@ app.post('/api/webhook', (req, res) => {
                 const customerEmail = payment.email;
                 const customerName = payment.notes?.customer_name || 'Designer';
 
-                sendWorkshopEmail(customerEmail, customerName);
+                sendWorkshopEmail(customerEmail, customerName, {
+                    paymentId: payment.id,
+                    amount: payment.amount,
+                    date: new Date(payment.created_at * 1000).toLocaleDateString()
+                });
                 break;
             case 'payment.failed':
                 console.log('Payment Failed:', payload.payment.entity.id);
