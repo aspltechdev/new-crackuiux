@@ -70,6 +70,7 @@ async function sendWorkshopEmail(toEmail, customerName, paymentDetails) {
                             <h3 style="margin-top: 0; color: #1e1b4b; font-size: 18px;">📅 Workshop Schedule</h3>
                             <p style="margin: 8px 0;"><strong>Date:</strong> Sunday, 1st March 2026</p>
                             <p style="margin: 8px 0;"><strong>Time:</strong> 10:00 AM – 01:00 PM IST</p>
+                            <p style="margin: 8px 0;"><strong>Mode:</strong> Online (Zoom Meeting)</p>
                             <p style="margin: 8px 0;"><strong>Duration:</strong> 3 Hours (Power-packed Session)</p>
                             <a href="https://calendar.app.google/qeQhP6riDS8PpqBS9" class="btn">Join Now — ₹${formattedAmount} Only</a>
                         </div>
