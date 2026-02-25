@@ -1,7 +1,7 @@
 export const handlePayment = async (amount: number, description: string, userData: { name: string, email: string, contact: string }) => {
     try {
         // 1. Create order on the server
-        const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://aspltesting.online';
+        const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://www.crackuiux.in/';
         const response = await fetch(`${API_BASE_URL}/api/create-order`, {
             method: 'POST',
             headers: {
