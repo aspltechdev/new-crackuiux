@@ -109,6 +109,77 @@ async function sendWorkshopEmail(toEmail, customerName, paymentDetails) {
     }
 }
 
+async function sendFailureEmail(toEmail, customerName, paymentDetails) {
+    const { paymentId, amount, reason } = paymentDetails;
+    const formattedAmount = (amount / 100).toFixed(2);
+
+    const mailOptions = {
+        from: `"Auro Lakshmanan" <${process.env.EMAIL_USER}>`,
+        to: toEmail,
+        subject: 'Payment Unsuccessful: UI/UX Workshop Registration',
+        html: `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <style>
+                    .container { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden; }
+                    .header { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; padding: 40px 20px; text-align: center; }
+                    .content { padding: 30px; color: #374151; }
+                    .info-box { background-color: #fffafb; border: 1px solid #fee2e2; border-radius: 8px; padding: 20px; margin: 25px 0; }
+                    .btn { display: inline-block; background-color: #ef4444; color: white !important; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 10px; }
+                    .footer { background-color: #f3f4f6; color: #6b7280; padding: 20px; text-align: center; font-size: 12px; }
+                    .receipt-item { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+                    .label { color: #9ca3af; }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="header">
+                        <h1 style="margin: 0; font-size: 24px;">Payment Unsuccessful</h1>
+                        <p style="margin-top: 10px; opacity: 0.9;">We couldn't process your registration payment.</p>
+                    </div>
+                    <div class="content">
+                        <p>Hello <strong>${customerName}</strong>,</p>
+                        <p>We’re writing to let you know that your recent payment for the <strong>UI/UX Interview Cracking Workshop</strong> was not successful. As a result, your registration is not yet confirmed.</p>
+                        
+                        <div class="info-box">
+                            <h3 style="margin-top: 0; color: #111827;">What happened?</h3>
+                            <p>Typically, payments fail due to incorrect card details, insufficient funds, or bank authorization issues.</p>
+                            <p><strong>Reason for Failure:</strong> ${reason || 'Transaction declined by bank'}</p>
+                            <a href="https://aspltesting.online" class="btn">Try Registering Again</a>
+                        </div>
+
+                        <h3 style="color: #111827; border-bottom: 1px solid #edf2f7; padding-bottom: 10px;">Attempted Transaction Details</h3>
+                        <div class="receipt-item">
+                            <span class="label">Payment ID:</span>
+                            <span>${paymentId}</span>
+                        </div>
+                        <div class="receipt-item">
+                            <span class="label">Attempted Amount:</span>
+                            <span>INR ${formattedAmount}</span>
+                        </div>
+
+                        <p style="margin-top: 30px;">If money was deducted from your account, it will usually be refunded automatically within 5-7 business days by your bank.</p>
+                        <p>If you need assistance, please reply to this email.</p>
+                        <p>Best regards,<br><strong>Auro Lakshmanan</strong></p>
+                    </div>
+                    <div class="footer">
+                        <p>© ${new Date().getFullYear()} Auro Lakshmanan UI/UX. All rights reserved.</p>
+                    </div>
+                </div>
+            </body>
+            </html>
+        `
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        console.log('Payment failure email sent to:', toEmail);
+    } catch (error) {
+        console.error('Error sending failure email:', error);
+    }
+}
+
 // Endpoint to create an order
 app.post('/api/create-order', async (req, res) => {
     const { amount, currency = 'INR', receipt, notes } = req.body;
@@ -166,7 +237,17 @@ app.post('/api/webhook', (req, res) => {
                 });
                 break;
             case 'payment.failed':
-                console.log('Payment Failed:', payload.payment.entity.id);
+                const failedPayment = payload.payment.entity;
+                console.log('Payment Failed:', failedPayment.id);
+
+                const failEmail = failedPayment.email;
+                const failName = failedPayment.notes?.customer_name || 'Designer';
+
+                sendFailureEmail(failEmail, failName, {
+                    paymentId: failedPayment.id,
+                    amount: failedPayment.amount,
+                    reason: failedPayment.error_description
+                });
                 break;
             // Add more cases as needed
         }
