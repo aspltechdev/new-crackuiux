@@ -29,7 +29,7 @@ export const handlePayment = async (amount: number, description: string, userDat
 
         // 2. Open Razorpay Checkout modal
         const options = {
-            key: "", // Using your test key by default for now
+            key: "rzp_live_SJXjGismaU9oWm", // Using your test key by default for now
             amount: order.amount,
             currency: order.currency,
             name: "Auro Lakshmanan",
