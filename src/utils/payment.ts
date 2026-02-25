@@ -2,14 +2,14 @@ export const handlePayment = async (amount: number, description: string, userDat
     try {
         // 1. Create order on the server
         // @ts-ignore
-        const API_BASE_URL = (import.meta.env as any).VITE_API_URL || 'https://www.crackuiux.in/';
+        const API_BASE_URL = (import.meta.env as any).VITE_API_URL || 'https://www.crackuiux.in';
         const response = await fetch(`${API_BASE_URL}/api/create-order`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                amount, 
+                amount,
                 currency: 'INR',
                 receipt: `receipt_${Date.now()}`,
                 notes: {
