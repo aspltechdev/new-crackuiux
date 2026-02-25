@@ -74,7 +74,7 @@ export function WorkshopDetails() {
           </h2>
           <p className="font-['Poppins:Regular',sans-serif] text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
             This isn't just another course. It's a complete transformation system that takes you from
-            <span className="text-pink-400 font-semibold"> interview anxiety to interview confidence</span> in 30 days.
+            <span className="text-pink-400 font-semibold"> interview anxiety to interview confidence</span> in 3 Hours.
           </p>
         </div>
 
@@ -93,7 +93,7 @@ export function WorkshopDetails() {
         {/* Modules Grid */}
         <div className="mb-12">
           <h3 className="font-['Poppins:SemiBold',sans-serif] text-2xl md:text-3xl text-white text-center mb-8">
-            What You'll Master in 30 Days
+            What You'll Master in 3 Hours
           </h3>
           <div className="grid md:grid-cols-2 gap-6">
             {modules.map((module, index) => (
@@ -152,7 +152,8 @@ export function WorkshopDetails() {
           {/* Join Now Button */}
           <div className="mt-8 text-center">
             <JoinNowButton
-              amount={1}
+              amount={299}
+              text="Join Now @ ₹299 Only"
               className="inline-block cursor-pointer bg-gradient-to-r from-yellow-400 to-orange-500 px-8 md:px-12 py-4 md:py-6 rounded-full shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300 transform hover:scale-105 text-xl md:text-2xl text-black"
             />
           </div>

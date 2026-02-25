@@ -46,7 +46,7 @@ export function CoachIntro() {
 
             <div className="bg-purple-800/40 rounded-xl p-6">
               <p className="font-['Poppins:Medium',sans-serif] text-xl md:text-2xl text-white text-center mb-3">
-                I will be your coach for 30 Days
+                I will be your coach for 3 Hours
               </p>
               <p className="text-yellow-400 font-['Poppins:SemiBold',sans-serif] text-center text-lg">
                 (Free Bonus Content)
@@ -83,7 +83,8 @@ export function CoachIntro() {
           {/* Join Now Button */}
           <div className="mt-8 text-center">
             <JoinNowButton
-              amount={1}
+              amount={299}
+              text="Join Now @ ₹299 Only"
               className="inline-block cursor-pointer bg-gradient-to-r from-yellow-400 to-orange-500 px-8 md:px-12 py-4 md:py-6 rounded-full shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300 transform hover:scale-105 text-xl md:text-2xl text-black"
             />
           </div>

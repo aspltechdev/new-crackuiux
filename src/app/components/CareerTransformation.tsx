@@ -9,7 +9,7 @@ export function CareerTransformation() {
           </h2>
           <p className="font-['Poppins:Regular',sans-serif] text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
             Imagine waking up knowing you have the skills, confidence, and connections to land any UX job you want. 
-            <span className="block mt-3 text-pink-400 font-semibold">That's not a dream. That's your reality in 30 days.</span>
+            <span className="block mt-3 text-pink-400 font-semibold">That's not a dream. That's your reality in 3 hours.</span>
           </p>
         </div>
 

@@ -28,7 +28,8 @@ export function CTASection() {
           {/* CTA Button */}
           <div className="text-center">
             <JoinNowButton
-              amount={1}
+              amount={299}
+              text="Join Now @ ₹299 Only"
               className="group cursor-pointer relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 px-8 md:px-12 py-4 md:py-6 shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300 transform hover:scale-105 text-white text-2xl md:text-3xl text-black"
             />
             <p className="font-['Poppins:Regular',sans-serif] text-sm md:text-base text-white/70 mt-4">
@@ -42,7 +43,7 @@ export function CTASection() {
           <div className="bg-gradient-to-br from-green-600 to-teal-600 rounded-xl p-6 text-center">
             <div className="text-4xl mb-3">✅</div>
             <p className="font-['Poppins:SemiBold',sans-serif] text-lg md:text-xl text-white mb-2">
-              30-Day Money Back Guarantee
+              3 Hours Money Back Guarantee
             </p>
             <p className="font-['Poppins:Regular',sans-serif] text-sm md:text-base text-white/90">
               Not satisfied? Get a full refund. No questions asked.
