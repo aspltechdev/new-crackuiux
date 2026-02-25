@@ -1,7 +1,8 @@
 export const handlePayment = async (amount: number, description: string, userData: { name: string, email: string, contact: string }) => {
     try {
         // 1. Create order on the server
-        const response = await fetch('http://localhost:5000/api/create-order', {
+        const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const response = await fetch(`${API_BASE_URL}/api/create-order`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
