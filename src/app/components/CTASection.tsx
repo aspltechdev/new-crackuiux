@@ -33,7 +33,7 @@ export function CTASection() {
               className="group cursor-pointer relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 px-8 md:px-12 py-4 md:py-6 shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300 transform hover:scale-105 text-white text-2xl md:text-3xl text-black"
             />
             <p className="font-['Poppins:Regular',sans-serif] text-sm md:text-base text-white/70 mt-4">
-              Secure your spot in the next batch
+              Secure your spot for the March 01, 2026 Batch
             </p>
           </div>
         </div>

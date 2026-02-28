@@ -72,6 +72,11 @@ export function WorkshopDetails() {
           <h2 className="font-['Poppins:Bold',sans-serif] text-3xl md:text-4xl lg:text-5xl text-white mb-4">
             Workshop Details
           </h2>
+          <div className="inline-block bg-pink-600/20 border border-pink-500/30 px-6 py-2 rounded-full mb-6">
+            <p className="font-['Poppins:SemiBold',sans-serif] text-pink-400 text-lg">
+              📅 March 01, 2026
+            </p>
+          </div>
           <p className="font-['Poppins:Regular',sans-serif] text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
             This isn't just another course. It's a complete transformation system that takes you from
             <span className="text-pink-400 font-semibold"> interview anxiety to interview confidence</span> in 3 Hours.

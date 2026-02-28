@@ -42,6 +42,19 @@ export function Hero() {
             </p>
           </div>
 
+          {/* Workshop Date */}
+          <div className="flex justify-center mt-6">
+            <div className="inline-flex items-center gap-4 bg-white/5 border border-white/10 px-6 md:px-10 py-4 rounded-2xl backdrop-blur-sm hover:border-pink-500/50 transition-colors group">
+              <div className="bg-pink-600/20 p-3 rounded-xl group-hover:bg-pink-600/30 transition-colors">
+                <span className="text-3xl">📅</span>
+              </div>
+              <div className="text-left">
+                <p className="text-pink-400 text-xs md:text-sm uppercase tracking-[0.2em] font-bold mb-1">Workshop Date</p>
+                <p className="text-white font-['Poppins:Bold',sans-serif] text-xl md:text-2xl">March 01, 2026</p>
+              </div>
+            </div>
+          </div>
+
           {/* Urgency Element */}
           <div className="flex justify-center mt-6">
             <div className="inline-block bg-gradient-to-r from-yellow-400 to-orange-500 px-6 py-3 rounded-full animate-pulse">
