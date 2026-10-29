@@ -89,11 +89,11 @@ export function VideoSection() {
             rel="noopener noreferrer"
             className="inline-block cursor-pointer bg-gradient-to-r from-yellow-400 to-orange-500 px-8 md:px-12 py-4 md:py-6 rounded-full shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300 transform hover:scale-105 text-xl md:text-2xl text-black font-bold text-center"
           >
-            Join Now @ ₹4,999 Only
+            Join Now @ ₹499 Only
           </a>
 
           <p className="mt-4 text-gray-400 font-['Poppins:Regular',sans-serif] text-sm">
-            Invest ₹4,999 (Limited Time Offer)
+            Invest ₹499 (Limited Time Offer)
           </p>
         </div>
 
